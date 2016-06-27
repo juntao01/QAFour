@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.four.qa.model.Question;
+import com.four.qa.model.RQuestion;
 
 /**
  * @author Tiaoyu
@@ -43,6 +44,33 @@ public interface IQuestionService {
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON + "; charset=UTF-8" })
 	@Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 	@Path("/createQuestion")
-	public Question createQuestion(Question q);
+	public Question createQuestion(RQuestion q);
 	
+	/**
+	 * 通过关键字模糊搜索问题
+	 * 
+	 * @author mabing
+	 * @time 2016-6-26 15:32
+	 * @param key
+	 * @return
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON + "; charset=UTF-8" })
+	@Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+	@Path("/getListByQKey/{key}")
+	public List<Question> getListByQKey(@PathParam("key") String key);
+
+	/**
+	 * 通过话题tpid获得话题信息
+	 * 
+	 * @author Tiaoyu
+	 * @time 2016/6/26 23:54
+	 * @param tpid
+	 * @return
+	 */
+	@GET
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON + "; charset=UTF-8" })
+	@Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+	@Path("/getTopicByTPID/{qid}")
+	public Question getTopicByTPID(@PathParam("qid") int qid);
 }
